@@ -1,19 +1,17 @@
 import cv2
 import numpy as np
 from ultralytics import YOLO
-model = YOLO(r"C:\Users\SOHAM MONDAL\Desktop\Yolov10Firedetectionmodel\runs\content\runs\detect\train\weights\best.pt")
+model = YOLO("best.pt")
 
 cap = cv2.VideoCapture(0)
 
 prev_fire_positions = []  
 static_frames = 0  
-STATIC_THRESHOLD = 20  # Number of frames fire must remain still to be considered fake
-
+STATIC_THRESHOLD = 20
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
         break
-
     results = model.predict(frame, conf=0.6)
 
     fire_detected = False
@@ -24,7 +22,6 @@ while cap.isOpened():
             x1, y1, x2, y2 = map(int, box.xyxy[0])  
             conf = box.conf[0].item()
             
-            
             new_fire_positions.append((x1, y1, x2, y2))
 
             # Draw bounding box
@@ -33,7 +30,6 @@ while cap.isOpened():
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
             fire_detected = True
-
     if fire_detected:
         if prev_fire_positions and new_fire_positions:
             
