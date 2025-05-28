@@ -110,5 +110,3 @@ Evaluate the model using metrics like:
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
-This `README` file provides an overview of the fire detection project using YOLOv10, usage, and customization. Feel free to adjust it as per your project's specific details.
